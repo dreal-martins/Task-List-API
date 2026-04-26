@@ -5,6 +5,7 @@ import com.drealmartins.tasklistbackend.dto.TaskRequest;
 import com.drealmartins.tasklistbackend.dto.TaskResponse;
 import com.drealmartins.tasklistbackend.entity.TaskStatus;
 import com.drealmartins.tasklistbackend.service.TaskService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,9 +16,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")
+@RateLimiter(name = "tasks")
 @RequiredArgsConstructor
 public class TaskController {
-
     private final TaskService taskService;
 
     @PostMapping

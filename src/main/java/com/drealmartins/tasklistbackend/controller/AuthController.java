@@ -4,6 +4,7 @@ import com.drealmartins.tasklistbackend.dto.*;
 import com.drealmartins.tasklistbackend.entity.OtpType;
 import com.drealmartins.tasklistbackend.service.AuthService;
 import com.drealmartins.tasklistbackend.service.OtpService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@RateLimiter(name = "auth")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
